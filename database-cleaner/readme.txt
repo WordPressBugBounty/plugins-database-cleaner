@@ -3,9 +3,9 @@ Contributors: TigrouMeow
 Tags: database, clean, cleaner, optimize, sql
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 
 User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
 
@@ -44,9 +44,13 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 
 == Changelog ==
 
-= 1.1.4 (2024/09/19) =
+= 1.1.5 (2024/11/04) =
+* Update: Minor enhancements.
 * Update: Better support for more plugins.
 * 💕 Don't hesitate to share some love with us. If you enjoy Database Cleaner, please leave a review [here](https://wordpress.org/support/plugin/database-cleaner/). Also, any issues or feature requests you have, share it with us, we'll do our best.
+
+= 1.1.4 (2024/09/19) =
+* Update: Better support for more plugins.
 
 = 1.1.3 (2024/08/25) =
 * Update: Slightly cleaner UI.
