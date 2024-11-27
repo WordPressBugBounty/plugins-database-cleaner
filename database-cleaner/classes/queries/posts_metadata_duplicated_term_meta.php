@@ -72,7 +72,7 @@ class Meow_DBCLNR_Queries_Posts_Metadata_Duplicated_Term_Meta extends Meow_DBCLN
         global $wpdb;
         $result = $wpdb->get_results( $wpdb->prepare(
             "
-			SELECT tm.*
+			SELECT tm1.*
 			FROM $wpdb->termmeta tm1
 			WHERE tm1.meta_id NOT IN(
 				SELECT *

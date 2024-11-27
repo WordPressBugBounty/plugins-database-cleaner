@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 
 User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
 
@@ -43,6 +43,11 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.1.7 (2024/11/27) =
+* Fix: Unused Terms Columns.
+* Fix: Duplicated Term Meta Select.
+* Fix: Avoid some issues which were breaking the UI.
 
 = 1.1.6 (2024/11/11) =
 * Update: Better support for more plugins.
