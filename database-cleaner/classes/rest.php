@@ -1116,9 +1116,10 @@ class Meow_DBCLNR_Rest
 		$data = array();
 		foreach ( $list as $item ) {
 			$data[] = array_merge( $item, [
-				'info' => __( apply_filters( 'dbclnr_check_table_info', $item['table'], null ), 'database-cleaner' ),
+				'info' => apply_filters( 'dbclnr_check_table_info', $item['table'], null )
 			] );
 		}
+
 		return $data;
 	}
 
@@ -1126,9 +1127,10 @@ class Meow_DBCLNR_Rest
 		$data = array();
 		foreach ( $list as $item ) {
 			$data[] = array_merge( $item, [
-				'info' => __( apply_filters( 'dbclnr_check_post_type_info', $item['name'], null ), 'database-cleaner' ),
+				'info' => apply_filters( 'dbclnr_check_post_type_info', $item['name'], null )
 			] );
 		}
+
 		return $data;
 	}
 
@@ -1136,7 +1138,7 @@ class Meow_DBCLNR_Rest
 		$data = array();
 		foreach ( $list as $item ) {
 			$data[] = array_merge( $item, [
-				'info' => __( apply_filters( 'dbclnr_check_option_info', $item['option_name'], null ), 'database-cleaner' ),
+				'info' => apply_filters( 'dbclnr_check_option_info', $item['option_name'], null )
 			] );
 		}
 		return $data;
@@ -1146,7 +1148,7 @@ class Meow_DBCLNR_Rest
 		$data = array();
 		foreach ( $list as $jobs ) {
 			$data[] = array_merge( $jobs, [
-				'info' => __( apply_filters( 'dbclnr_check_cron_info', $jobs['cron_name'], null ), 'database-cleaner' ),
+				'info' => apply_filters( 'dbclnr_check_cron_info', $jobs['cron_name'], null )
 			] );
 		}
 		return $data;
@@ -1155,7 +1157,7 @@ class Meow_DBCLNR_Rest
 		$data = array();
 		foreach ( $list as $item ) {
 			$data[] = array_merge( $item, [
-				'info' => __( apply_filters( 'dbclnr_check_metadata_info', $item['meta_key'], null ), 'database-cleaner' ),
+				'info' => apply_filters( 'dbclnr_check_metadata_info', $item['meta_key'], null )
 			] );
 		}
 		return $data;

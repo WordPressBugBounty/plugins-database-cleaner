@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 
 User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
 
@@ -44,6 +44,11 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 
 == Changelog ==
 
+= 1.1.8 (2024/12/22) =
+* Update: Better support for more plugins.
+* Fix: Translations with arrays issue.
+* 💕 Don't hesitate to share some love with us. If you enjoy Database Cleaner, please leave a review [here](https://wordpress.org/support/plugin/database-cleaner/). Also, any issues or feature requests you have, share it with us, we'll do our best.
+
 = 1.1.7 (2024/11/27) =
 * Fix: Unused Terms Columns.
 * Fix: Duplicated Term Meta Select.
@@ -51,7 +56,6 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 
 = 1.1.6 (2024/11/11) =
 * Update: Better support for more plugins.
-* 💕 Don't hesitate to share some love with us. If you enjoy Database Cleaner, please leave a review [here](https://wordpress.org/support/plugin/database-cleaner/). Also, any issues or feature requests you have, share it with us, we'll do our best.
 
 = 1.1.5 (2024/11/04) =
 * Update: Minor enhancements.
