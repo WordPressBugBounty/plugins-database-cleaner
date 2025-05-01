@@ -3,9 +3,9 @@ Contributors: TigrouMeow
 Tags: database, clean, cleaner, optimize, sql
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 
 User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
 
@@ -43,6 +43,13 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.2.1 (2025/05/01) =
+* Add: Introduced plugin support to extend cleaning capabilities.
+* Fix: Resolved issues in the Cron Jobs tab for proper display and functionality.
+* Add: Added support for more options to increase customization.
+* Update: Switched to raw NekoTables in the core for improved data visibility.
+* Add: Expanded compatibility with additional plugins.
 
 = 1.2.0 (2025/03/12) =
 * Add: Implemented Cron Jobs filtering by schedule for better task management.

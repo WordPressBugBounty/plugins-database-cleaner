@@ -256,7 +256,32 @@ class Meow_DBCLNR_Core
 	}
 
 	function remove_cron_entry( $name, $args = array() ) {
-		return !!wp_clear_scheduled_hook( $name, $args );
+		// Also directly modify the cron option in the database
+		$crons = get_option( 'cron' );
+		$to_delete = false;
+
+		if ( is_array( $crons ) ) {
+
+			foreach( $crons as $timestamp => $cron_jobs ) {
+				foreach( $cron_jobs as $hook => $cron_job ) {
+					if ( $hook === $name ) {
+						$to_delete = $timestamp;
+						break 2;
+					}
+				}
+			}
+			//1743566702
+			if ( $to_delete ) {
+				unset( $crons[ $to_delete ] );
+				$clear = update_option( 'cron', $crons );
+			} else {
+				$clear = wp_clear_scheduled_hook( $name, $args );
+			}
+
+		}
+
+
+		return $clear;
 	}
 
 	function format_cron_info( $list ) {

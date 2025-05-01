@@ -634,16 +634,25 @@ class Meow_DBCLNR_Rest
 			}
 		}
 		try {
-			$result = $this->admin->delete_crons( $crons );
+			$deleted_count = 0;
 			foreach ( $crons as $cron ) {
-				$this->core->log("✅ Deleted cron '{$cron['name']}'");
+				$result = $this->core->remove_cron_entry( $cron['name'], $cron['args'] );
+				if ( $result !== false ) {
+					$deleted_count++;
+					$this->core->log("✅ Deleted cron '{$cron['name']}'");
+				}
 			}
+			
+			// Get fresh cron data after deletion
+			$cron_jobs = get_option( 'cron' );
+			$data = $this->add_cron_info( $this->core->format_cron_info( $cron_jobs ) );
+			
 			return new WP_REST_Response( [
 				'success' => true,
 				'data' => [
-					'deleted' => $result,
-					'finished' => $this->is_finished( $result ),
-					'data' => [],
+					'deleted' => $deleted_count,
+					'finished' => true,
+					'data' => $data,
 				],
 			], 200 );
 		}
