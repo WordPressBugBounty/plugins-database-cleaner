@@ -5,7 +5,9 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
 
@@ -43,6 +45,9 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.2.2 (2025/05/04) =
+* Update: REST API responses now show autoload option values as 'yes' and 'no' instead of 'on' and 'off'.
 
 = 1.2.1 (2025/05/01) =
 * Add: Introduced plugin support to extend cleaning capabilities.

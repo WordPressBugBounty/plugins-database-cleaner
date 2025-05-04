@@ -421,6 +421,17 @@ class Meow_DBCLNR_Rest
 
 	function rest_options() {
 		$data = $this->admin->get_options();
+
+		// Consider ON as YES and OFF as NO
+		foreach ( $data as $key => $option ) {
+			if ( $option['autoload'] === 'on' ) {
+				$data[$key]['autoload'] = 'yes';
+			}
+			if ( $option['autoload'] === 'off' ) {
+				$data[$key]['autoload'] = 'no';
+			}
+		}
+
 		$data = $this->add_option_info( $data );
 		return new WP_REST_Response( [
 			'success' => true,
