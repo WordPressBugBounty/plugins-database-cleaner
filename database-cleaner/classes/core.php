@@ -303,7 +303,15 @@ class Meow_DBCLNR_Core
 		return $data;
 	}
 
-	function get_core_entry_counts( $list ) {
+	function get_core_entry_counts( $list, $admin_load = false ) {
+		
+		if( $admin_load ) {
+			$auto_refresh_core_count = $this->get_option( 'auto_refresh_core_count' );
+			if( !$auto_refresh_core_count ) {
+				return [];
+			}
+		}
+
 		$queries = new Meow_DBCLNR_Queries();
 		$age_threshold = $this->get_option( 'aga_threshold' );
 		$age_threshold = $age_threshold === 'none' ? 0 : $age_threshold;

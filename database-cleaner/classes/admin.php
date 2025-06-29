@@ -55,11 +55,11 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 				'transients' => $this->core->add_clean_style_data( Meow_DBCLNR_Items::$TRANSIENTS ),
 			],
 			'core_count' => [
-				'posts' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS ),
-				'posts_metadata' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS_METADATA ),
-				'users' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$USERS ),
-				'comments' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$COMMENTS ),
-				'transients' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$TRANSIENTS ),
+				'posts' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS, true ),
+				'posts_metadata' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS_METADATA, true),
+				'users' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$USERS. true ),
+				'comments' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$COMMENTS, true ),
+				'transients' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$TRANSIENTS, true ),
 			],
 			'options' => $this->core->get_all_options(),
 			'metadata_tables' => $this->core->get_metadata_tables(),
@@ -143,33 +143,33 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 	}
 
 	function get_metadata( $table, $ids = null, $order_by = 'meta_value_length', $order = 'desc',
-		$skip = 0, $limit = 0, $search_list = '', $sizes = []
+		$skip = 0, $limit = 0, $search_list = '', $sizes = [], $postIdList = []
 	) {
 		global $wpdb;
 		switch ($table) {
 			case $wpdb->postmeta:
-				return $this->get_postmeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes );
+				return $this->get_postmeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes, $postIdList );
 			case $wpdb->usermeta:
-				return $this->get_usermeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes );
+				return $this->get_usermeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes, $postIdList );
 		}
 		throw new Error("Invalid table specified");
 	}
 
-	function get_metadata_count( $table, $ids = null, $search_list = '', $sizes = [] ) {
+	function get_metadata_count( $table, $ids = null, $search_list = '', $sizes = [], $postIdList = [] ) {
 		global $wpdb;
 		switch ($table) {
 			case $wpdb->postmeta:
-				return $this->get_postmeta_count( $ids, $search_list, $sizes );
+				return $this->get_postmeta_count( $ids, $search_list, $sizes, $postIdList );
 			case $wpdb->usermeta:
-				return $this->get_usermeta_count( $ids, $search_list, $sizes );
+				return $this->get_usermeta_count( $ids, $search_list, $sizes, $postIdList );
 		}
 		throw new Error("Invalid table specified");
 	}
 
-	function get_postmeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes ) {
+	function get_postmeta( $ids, $order_by, $order, $skip, $limit, $search_list, $sizes, $postIdList = [] ) {
 		global $wpdb;
 
-		$where_clause = $this->get_metadata_where_clause( $wpdb->postmeta, $ids, $search_list, $sizes );
+		$where_clause = $this->get_metadata_where_clause( $wpdb->postmeta, $ids, $search_list, $sizes, $postIdList );
 		$order_clause = $this->get_metadata_order_clause( $order_by, $order );
 		$limit_clause = $this->get_metadata_limit_clause( $skip, $limit );
 
@@ -184,10 +184,10 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 		return $result;
 	}
 
-	function get_postmeta_count( $ids, $search_list, $sizes ) {
+	function get_postmeta_count( $ids, $search_list, $sizes, $postIdList = [] ) {
 		global $wpdb;
 
-		$where_clause = $this->get_metadata_where_clause( $wpdb->postmeta, $ids, $search_list, $sizes );
+		$where_clause = $this->get_metadata_where_clause( $wpdb->postmeta, $ids, $search_list, $sizes, $postIdList );
 
 		$result = (int)$wpdb->get_var( "
 			SELECT COUNT(meta_id)
@@ -216,10 +216,10 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 		return $result;
 	}
 
-	function get_usermeta_count( $ids, $search_list, $sizes ) {
+	function get_usermeta_count( $ids, $search_list, $sizes, $postIdList = [] ) {
 		global $wpdb;
 
-		$where_clause = $this->get_metadata_where_clause( $wpdb->usermeta, $ids, $search_list, $sizes );
+		$where_clause = $this->get_metadata_where_clause( $wpdb->usermeta, $ids, $search_list, $sizes, $postIdList);
 
 		$result = (int)$wpdb->get_var( "
 			SELECT COUNT(umeta_id)
@@ -267,7 +267,7 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 		return $limit_clause;
 	}
 
-	function get_metadata_where_clause( $table, $ids, $search_list, $sizes ) {
+	function get_metadata_where_clause( $table, $ids, $search_list, $sizes, $postIdList = [] ) {
 		global $wpdb;
 		$where_clause = 'WHERE 1=1 ';
 		if ( !empty($ids) ) {
@@ -291,6 +291,14 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 			}
 			$search_where_clause = implode( ' AND ', $search_where );
 			$where_clause .= "AND ($search_where_clause)";
+		}
+		if ( !empty( $postIdList )  ) {
+			$post_id_where = [];
+			foreach ( $postIdList as $postId ) {
+				$post_id_where[] = $wpdb->prepare( "post_id = %d", (int)$postId );
+			}
+			$post_id_where_clause = implode( ' OR ', $post_id_where );
+			$where_clause .= "AND ($post_id_where_clause)";
 		}
 		if ( count( $sizes ) > 0 ) {
 			$size_where = [];

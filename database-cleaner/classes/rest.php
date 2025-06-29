@@ -527,6 +527,9 @@ class Meow_DBCLNR_Rest
 		$size = trim( $request->get_param('size') );
 		$sizes = empty($size) ? [] : explode( ',', $size );
 
+		$postId = $request->get_param('postId');
+		$postIdList = empty( $postId ) ? [] : explode( ',', $postId );
+
 		if ( !$this->admin->valid_metadata_table( $table ) ) {
 			return new WP_REST_Response( [ 'success' => false, 'message' => __( 'Invalid meta table.', 'database-cleaner' ) ], 400 );
 		}
@@ -536,10 +539,10 @@ class Meow_DBCLNR_Rest
 		// if ( $needs_additional_info ) {
 		// 	$limit = null;
 		// } else {
-			$count = $this->admin->get_metadata_count( $table, null, $search_list, $sizes );
+			$count = $this->admin->get_metadata_count( $table, null, $search_list, $sizes, $postIdList );
 		// }
 
-		$data = $this->admin->get_metadata( $table, null, $order_by, $order, $skip, $limit, $search_list, $sizes );
+		$data = $this->admin->get_metadata( $table, null, $order_by, $order, $skip, $limit, $search_list, $sizes, $postIdList );
 		$data = $this->add_metadata_info( $data );
 		return new WP_REST_Response( [
 			'success' => true,

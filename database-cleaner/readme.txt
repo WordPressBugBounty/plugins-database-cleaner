@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,11 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.2.3 (2025/06/29) =
+* Add: Optional Core Count for large databases.
+* Update: Metadata retrieval functions now support filtering by specific post IDs.
+* Add: Support for more plugins.
 
 = 1.2.2 (2025/05/04) =
 * Update: REST API responses now show autoload option values as 'yes' and 'no' instead of 'on' and 'off'.

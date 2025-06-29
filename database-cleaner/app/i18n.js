@@ -45,6 +45,7 @@ i18n.CORE_SECTIONS = {
   COMMENTS: __('Comments', 'database-cleaner'),
   TRANSIENTS: __('Transients', 'database-cleaner'),
   POST_TYPES: __('Post Types', 'database-cleaner'),
+  AUTO_REFRESH_DISABLED: __('Auto Refresh is disabled. You can enable it in the Settings tab.', 'database-cleaner'),
 };
 
 i18n.HOOKS = {
@@ -197,6 +198,9 @@ i18n.SETTINGS = {
   MODULES: __('Modules', 'database-cleaner'),
   BUILD_INDEXES: __('Build Indexes', 'database-cleaner'),
   REMOVE_INDEXES: __('Remove Indexes', 'database-cleaner'),
+
+  AUTO_REFRESH_CORE_COUNT: __('Auto Refresh Core Counts', 'database-cleaner'),
+  AUTO_REFRESH_CORE_COUNT_DESCRIPTION: __('Automatically refresh the core counts when you open the plugin This is not recommended if your database size exceeds your server memory limit.', 'database-cleaner'),
 }
 
 i18n.CUSTOM_QUERIES = {
