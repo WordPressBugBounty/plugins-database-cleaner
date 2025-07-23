@@ -18,7 +18,7 @@ class Meow_DBCLNR_Core
 		$this->prefix = $wpdb->prefix;
 		$this->site_url = get_site_url();
 		$this->is_rest = MeowCommon_Helpers::is_rest();
-		$this->is_cli = defined( 'WP_CLI' ) && WP_CLI;
+		$this->is_cli = defined( 'WP_CLI' ) && constant( 'WP_CLI' );
 
 		$this->metadata_tables = [
 			'Post Meta' => $this->prefix . 'postmeta',
@@ -616,6 +616,7 @@ class Meow_DBCLNR_Core
 			'module_cronjobs' => true,
 			'module_customequeries' => true,
 			'logs_path' => null,
+			'auto_refresh_core_count' => false,
 		];
 
 		// Clean Style Options for All Items

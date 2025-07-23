@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,12 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.2.5 (2025/07/23) =
+* Update: Added support for more plugins.
+* Update: Refreshed common components.
+* Fix: Corrected typo in users count retrieval process.
+* Add: Introduced auto-refresh option for core count to ensure real-time updates.
 
 = 1.2.4 (2025/07/02) =
 * Fix: Better columns in the UI.

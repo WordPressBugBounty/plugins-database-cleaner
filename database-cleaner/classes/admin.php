@@ -57,7 +57,7 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 			'core_count' => [
 				'posts' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS, true ),
 				'posts_metadata' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$POSTS_METADATA, true),
-				'users' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$USERS. true ),
+				'users' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$USERS, true ),
 				'comments' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$COMMENTS, true ),
 				'transients' => $this->core->get_core_entry_counts( Meow_DBCLNR_Items::$TRANSIENTS, true ),
 			],
