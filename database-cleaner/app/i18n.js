@@ -65,6 +65,7 @@ i18n.TABLE_COLUMN_TITLE = {
   SCHEDULE: __('Schedule', 'database-cleaner'),
   NEXT_RUN: __('Next Run', 'database-cleaner'),
   NAME: __('Name', 'database-cleaner'),
+  VALUE: __('Value', 'database-cleaner'),
   CLEAN: __('Clean', 'database-cleaner'),
   ACTION: __('Action', 'database-cleaner'),
   POST_ID: __('Post ID', 'database-cleaner'),
@@ -198,6 +199,9 @@ i18n.SETTINGS = {
   MODULES: __('Modules', 'database-cleaner'),
   BUILD_INDEXES: __('Build Indexes', 'database-cleaner'),
   REMOVE_INDEXES: __('Remove Indexes', 'database-cleaner'),
+
+  STUCK_RESET: __('Stuck Reset', 'database-cleaner'),
+  SWEEPER_STUCK_RESET_DESCRIPTION: __('The next Sweeper schedule might start when the current one is still running. This can happen multiples times, and it is not a problem. However, if you want to reset the Sweeper tasks when it has been running for too long, you can set a number of hours after which it will forcefully complete the current task.', 'database-cleaner'),
 
   AUTO_REFRESH_CORE_COUNT: __('Auto Refresh Core Counts', 'database-cleaner'),
   AUTO_REFRESH_CORE_COUNT_DESCRIPTION: __('Automatically refresh the core counts when you open the plugin This is not recommended if your database size exceeds your server memory limit.', 'database-cleaner'),

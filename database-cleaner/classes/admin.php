@@ -174,7 +174,7 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 		$limit_clause = $this->get_metadata_limit_clause( $skip, $limit );
 
 		$result = $wpdb->get_results( "
-			SELECT meta_id AS id, post_id, meta_key, length(meta_value) AS meta_value_length
+			SELECT meta_id AS id, post_id, meta_key, length(meta_value) AS meta_value_length, LEFT(meta_value, 15) AS meta_value_preview
 			FROM $wpdb->postmeta
 			$where_clause
 			$order_clause
@@ -206,7 +206,7 @@ class Meow_DBCLNR_Admin extends MeowCommon_Admin {
 		$limit_clause = $this->get_metadata_limit_clause( $skip, $limit );
 
 		$result = $wpdb->get_results( "
-			SELECT umeta_id AS id, user_id, meta_key, length(meta_value) AS meta_value_length
+			SELECT umeta_id AS id, user_id, meta_key, length(meta_value) AS meta_value_length, LEFT(meta_value, 30) AS meta_value_preview
 			FROM $wpdb->usermeta
 			$where_clause
 			$order_clause

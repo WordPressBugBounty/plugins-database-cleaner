@@ -59,6 +59,31 @@ class Meow_DBCLNR_Background
 
   public function sweeper() {
     //$this->core->log( "[Cron] Sweeper started." );
+    
+    // Check if sweeper has been running too long and reset if stuck
+    $sweeper_tasks = $this->core->get_option( 'sweeper_tasks' );
+    $reset_after_hours = intval( $this->core->get_option( 'sweeper_stuck_reset', 10 ) ); // Default to 10 hours if not set
+
+    if ( isset( $sweeper_tasks['status'] ) && $sweeper_tasks['status'] === 'running' &&
+        isset( $sweeper_tasks['last_execution'] ) ) {
+
+      $last_execution = new DateTime( $sweeper_tasks['last_execution'] );
+      $now = new DateTime();
+      $diff = $now->diff( $last_execution );
+      $hours_running = $diff->h + ( $diff->days * 24 );
+
+      if ( $hours_running > $reset_after_hours ) {
+        $this->core->log( "[Cron] Sweeper appears stuck (running for {$hours_running} hours), resetting to completed state." );
+        $reset_tasks = array_merge( $sweeper_tasks, [
+          'status' => 'completed',
+          'next_action' => 'reset',
+          'last_execution' => $now->format( 'Y-m-d H:i:s' ),
+        ]);
+
+        $this->core->update_options( array_merge( $this->core->get_all_options(), [ 'sweeper_tasks' => $reset_tasks ] ) );
+      }
+    }
+    
     $res = apply_filters( 'dbclnr_sweeper_run_next', [
 			'success' => false,
 			'data' => null,

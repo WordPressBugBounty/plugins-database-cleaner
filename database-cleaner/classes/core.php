@@ -330,6 +330,12 @@ class Meow_DBCLNR_Core
 	function add_clean_style_data ( $list ) {
 		$options = $this->get_all_options();
 		$data = array();
+
+		if ( !is_array( $list ) || !count( $list ) ) {
+			$this->log( "Clean style list is empty or not an array: " . print_r( $list, true ) );
+			return $data;
+		}
+
 		foreach ( $list as $item ) {
 			$data[] = array_merge( $item, [
 				'clean_style' => $options[ $item['item'] . '_clean_style' ]
@@ -602,6 +608,7 @@ class Meow_DBCLNR_Core
 			'delay' => 100,
 			'sweeper_enabled' => false,
 			'sweeper_schedule' => 'hourly', // hourly, twicedaily, daily
+			'sweeper_stuck_reset' => 10,
 			'sweeper_tasks' => [
 				'items' => null,
 				'next_item' => null,
