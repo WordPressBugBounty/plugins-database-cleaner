@@ -80,13 +80,24 @@ class Meow_DBCLNR_Support
   }
 
   function get_active_plugins_list() {
+
     if ( $this->active_plugins === null ) {
-      $this->active_plugins = (array)get_option( 'active_plugins', [] );
+      $this->active_plugins = wp_get_active_and_valid_plugins();
+
       foreach ( $this->active_plugins as &$plugin ) {
-        $exploded = explode( '/', $plugin );
-        $plugin = preg_replace( '/\-pro$/', '', $exploded[0] );
+        $exploded = explode( '/wp-content/plugins/', $plugin );
+        $name     = explode( '/', $exploded[1] )[0];
+
+        $plugin = preg_replace( '/\-pro$/', '', $name );
+      }
+
+      $themes = wp_get_themes();
+      foreach ( $themes as $path => $data ) {
+        $dir = explode( '/', $path );
+        $this->active_plugins[] = $dir[0];
       }
     }
+    
     return $this->active_plugins;
   }
 

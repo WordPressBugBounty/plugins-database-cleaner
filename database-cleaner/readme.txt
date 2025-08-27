@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,11 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.2.7 (2025/08/27) =
+* Add: Support for more plugins.
+* Add: Assign Themes.
+* Update: Better UI.
 
 = 1.2.6 (2025/08/16) =
 * Add: Ability to delete Custom Queries even if they are not completed.

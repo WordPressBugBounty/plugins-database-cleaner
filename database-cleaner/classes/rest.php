@@ -1081,19 +1081,32 @@ class Meow_DBCLNR_Rest
 		if ( ! function_exists( 'get_plugins' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
+
 		$plugins = get_plugins();
+		$themes  = wp_get_themes();
 
-		if ( empty( $plugins ) ) return [];
+		if ( empty( $plugins ) && empty( $themes ) ) {
+			return [];
+		}
 
-		$installed_plugins = [];
+		$installed_plugins_and_themes = [];
 		foreach ( $plugins as $path => $data ) {
 			$dir = explode( '/', $path );
-			$installed_plugins[] = [
+			$installed_plugins_and_themes[] = [
 				'name' => $data['Name'],
 				'slug' => $dir[0],
 			];
 		}
-		return $installed_plugins;
+
+		foreach ( $themes as $path => $data ) {
+			$dir = explode( '/', $path );
+			$installed_plugins_and_themes[] = [
+				'name' => $data['Name'] . ' (Theme)',
+				'slug' => $dir[0],
+			];
+		}
+
+		return $installed_plugins_and_themes;
 	}
 
 	protected function get_auto_clean_items() {
