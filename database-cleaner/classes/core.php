@@ -17,7 +17,7 @@ class Meow_DBCLNR_Core
 		global $wpdb;
 		$this->prefix = $wpdb->prefix;
 		$this->site_url = get_site_url();
-		$this->is_rest = MeowCommon_Helpers::is_rest();
+		$this->is_rest = MeowKit_DBCLNR_Helpers::is_rest();
 		$this->is_cli = defined( 'WP_CLI' ) && constant( 'WP_CLI' );
 
 		$this->metadata_tables = [
@@ -256,32 +256,34 @@ class Meow_DBCLNR_Core
 	}
 
 	function remove_cron_entry( $name, $args = array() ) {
-		// Also directly modify the cron option in the database
+
+		$cleared = wp_clear_scheduled_hook( $name, $args );
+		
+		// manually clean up the cron option to ensure it's removed
 		$crons = get_option( 'cron' );
-		$to_delete = false;
-
+		
 		if ( is_array( $crons ) ) {
-
+			$modified = false;
+			
 			foreach( $crons as $timestamp => $cron_jobs ) {
-				foreach( $cron_jobs as $hook => $cron_job ) {
-					if ( $hook === $name ) {
-						$to_delete = $timestamp;
-						break 2;
+				if ( isset( $cron_jobs[$name] ) ) {
+
+					unset( $crons[$timestamp][$name] );
+					$modified = true;
+					
+					// timestamp has no more jobs, remove it entirely
+					if ( empty( $crons[$timestamp] ) ) {
+						unset( $crons[$timestamp] );
 					}
-				}
+				} 
 			}
-			//1743566702
-			if ( $to_delete ) {
-				unset( $crons[ $to_delete ] );
-				$clear = update_option( 'cron', $crons );
-			} else {
-				$clear = wp_clear_scheduled_hook( $name, $args );
+			
+			if ( $modified ) {
+				update_option( 'cron', $crons );
 			}
-
 		}
-
-
-		return $clear;
+		
+		return $cleared;
 	}
 
 	function format_cron_info( $list ) {
@@ -603,6 +605,7 @@ class Meow_DBCLNR_Core
 			'metadata_usedby' => [],
 			'deep_deletions' => false,
 			'mode' => 'easy',
+			'enable_protected_deletion' => false,
 			'hide_message' => false,
 			'migrated_option_names' => true, // Flag whether it has migrated option's name or not
 			'delay' => 100,

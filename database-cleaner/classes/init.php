@@ -20,12 +20,12 @@ spl_autoload_register(function ( $class ) {
   else if ( strpos( $class, 'Meow_DBCLNR' ) !== false ) {
     $file = DBCLNR_PATH . '/classes/' . str_replace( 'meow_dbclnr_', '', strtolower( $class ) ) . '.php';
   }
-  else if ( strpos( $class, 'MeowCommon_' ) !== false ) {
-    $file = DBCLNR_PATH . '/common/' . str_replace( 'meowcommon_', '', strtolower( $class ) ) . '.php';
+  else if ( strpos( $class, 'MeowKit_DBCLNR_' ) !== false ) {
+    $file = DBCLNR_PATH . '/common/' . str_replace( 'meowkit_dbclnr_', '', strtolower( $class ) ) . '.php';
   }
-  else if ( strpos( $class, 'MeowCommonPro_' ) !== false ) {
+  else if ( strpos( $class, 'MeowKitPro_DBCLNR_' ) !== false ) {
     $necessary = false;
-    $file = DBCLNR_PATH . '/common/premium/' . str_replace( 'meowcommonpro_', '', strtolower( $class ) ) . '.php';
+    $file = DBCLNR_PATH . '/common/premium/' . str_replace( 'meowkitpro_dbclnr_', '', strtolower( $class ) ) . '.php';
   }
   else if ( strpos( $class, 'MeowPro_DBCLNR' ) !== false ) {
     $necessary = false;
@@ -46,6 +46,6 @@ global $dbclnr_core;
 $dbclnr_core = new Meow_DBCLNR_Core();
 
 // In admin or Rest API request (REQUEST URI begins with '/wp-json/')
-// if ( is_admin() || MeowCommon_Helpers::is_rest() || ( defined( 'WP_CLI' ) && WP_CLI ) )
+// if ( is_admin() || MeowKit_DBCLNR_Helpers::is_rest() || ( defined( 'WP_CLI' ) && WP_CLI ) )
 
 ?>

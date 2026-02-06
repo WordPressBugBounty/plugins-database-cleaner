@@ -1,5 +1,5 @@
 <?php
-class Meow_DBCLNR_Admin extends MeowCommon_Admin {
+class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 	public $core;
 
 	public function __construct( $core ) {

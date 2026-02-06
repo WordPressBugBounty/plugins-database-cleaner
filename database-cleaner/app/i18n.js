@@ -20,6 +20,7 @@ i18n.COMMON = {
   ITEMS_PER_PAGE: __('items per page', 'database-cleaner'),
   CLEAN: __('Clean', 'database-cleaner'),
   DEV_TOOLS: __( 'Dev Tools', 'ai-engine' ),
+  ENABLE: __('Enable', 'database-cleaner'),
   LOGS: __('Logs', 'database-cleaner'),
   CLEAR_LOGS: __('Clear Logs', 'database-cleaner'),
   REFRESH_LOGS: __('Refresh Logs', 'database-cleaner'),
@@ -147,7 +148,7 @@ i18n.BULK_TASK = {
 }
 
 i18n.SETTINGS = {
-  INTRODUCTION: __("While using Database Cleaner is easy, I strongly recommend you to read the <a href='https://meowapps.com/database-cleaner/tutorial/' target='_blank'>tutorial</a> carefully. This plugin has more capabilities than other plugins of the same kind, so you might find new and interesting ways to handle your cleanups. If any issue, or feature request, please let me know on the <a href='https://wordpress.org/support/plugin/database-cleaner/' target='_blank'>WordPress Forums</a>. <b>Last but not least, backup your DB before doing anything!</b> If you don't know how, give a try to <a href='http://meow.click/blogvault' target='_blank'>BlogVault</a>. ", 'database-cleaner'),
+  INTRODUCTION: __("While using Database Cleaner is easy, I strongly recommend you to read the <a href='https://meowapps.com/database-cleaner/tutorial/' target='_blank'>tutorial</a> carefully. This plugin has more capabilities than other plugins of the same kind, so you might find new and interesting ways to handle your cleanups. I recommend enabling <strong>Auto-Refresh Counts</strong> in the Settings, which will automatically display the main items to clean in WordPress Core, and using <strong>Auto Clean</strong> for regular maintenance. If any issue, or feature request, please let me know on the <a href='https://wordpress.org/support/plugin/database-cleaner/' target='_blank'>WordPress Forums</a>. <b>Last but not least, backup your DB before doing anything!</b> If you don't know how, give a try to <a href='http://meow.click/blogvault' target='_blank'>BlogVault</a>. ", 'database-cleaner'),
   AUTO_CLEAN: __('Auto Clean', 'database-cleaner'),
   TODAY: __('TODAY', 'database-cleaner'),
   WORDPRESS_CORE: __('WordPress Core', 'database-cleaner'),
@@ -160,8 +161,9 @@ i18n.SETTINGS = {
   SETTINGS_LOGS: __('Settings & Logs', 'database-cleaner'),
   SETTINGS: __('Settings', 'database-cleaner'),
   LICENSE: __('License', 'database-cleaner'),
+  AUTO_CLEAN_EXPLANATION: __('The <strong>Auto Clean</strong> button removes old items from your database when clicked. The <strong>Age Threshold</strong> determines how old items must be before they are cleaned. <strong>Nyao Sweeper</strong> is a scheduled task that automatically runs Auto Clean at regular intervals.', 'database-cleaner'),
   AGE_THRESHOLD: __('Age Threshold', 'database-cleaner'),
-  AGE_THRESHOLD_DESCRIPTION: __('Auto Clean will be applied on items which are older than the specified number of days, months or years.', 'database-cleaner'),
+  AGE_THRESHOLD_DESCRIPTION: __('Only items older than this threshold will be cleaned.', 'database-cleaner'),
   MESSAGE: __('Message', 'database-cleaner'),
   MESSAGE_DESCRIPTION: __('Have you read it twice? If yes, hide it :)', 'database-cleaner'),
   PERFORMANCE: __('Performance', 'database-cleaner'),
@@ -186,7 +188,8 @@ i18n.SETTINGS = {
   NYAO_SWEEPER: __('Nyao Sweeper', 'database-cleaner'),
   PERFORM_NEXT_TASK: __('Perform Next Task', 'database-cleaner'),
   RESET_TASKS: __('Reset Tasks', 'database-cleaner'),
-  SWEEPER: __('Sweeper', 'database-cleaner'),
+  SWEEPER: __('Nyao Sweeper', 'database-cleaner'),
+  SWEEPER_ENABLE_LABEL: __('Enable Scheduled Auto-Clean', 'database-cleaner'),
   SCHEDULE: __('Schedule', 'database-cleaner'),
   SCHEDULE_5_MINUTES: __('Every 5 Minutes', 'database-cleaner'),
   SCHEDULE_10_MINUTES: __('Every 10 Minutes', 'database-cleaner'),
@@ -201,10 +204,14 @@ i18n.SETTINGS = {
   REMOVE_INDEXES: __('Remove Indexes', 'database-cleaner'),
 
   STUCK_RESET: __('Stuck Reset', 'database-cleaner'),
-  SWEEPER_STUCK_RESET_DESCRIPTION: __('The next Sweeper schedule might start when the current one is still running. This can happen multiples times, and it is not a problem. However, if you want to reset the Sweeper tasks when it has been running for too long, you can set a number of hours after which it will forcefully complete the current task.', 'database-cleaner'),
+  SWEEPER_STUCK_RESET_DESCRIPTION: __('Automatically stop and reset the Sweeper if a task runs longer than this many hours.', 'database-cleaner'),
 
-  AUTO_REFRESH_CORE_COUNT: __('Auto Refresh Core Counts', 'database-cleaner'),
-  AUTO_REFRESH_CORE_COUNT_DESCRIPTION: __('Automatically refresh the core counts when you open the plugin This is not recommended if your database size exceeds your server memory limit.', 'database-cleaner'),
+  AUTO_REFRESH_CORE_COUNT: __('WordPress Core', 'database-cleaner'),
+  AUTO_REFRESH_CORE_COUNT_LABEL: __('Auto-Refresh Counts', 'database-cleaner'),
+  AUTO_REFRESH_CORE_COUNT_DESCRIPTION: __('Automatically refresh counts when opening the plugin. Disable if you have a very large database.', 'database-cleaner'),
+  PROTECTED_ITEMS: __('Protected Items', 'database-cleaner'),
+  PROTECTED_ITEMS_ENABLE_DELETION: __('Enable Deletion', 'database-cleaner'),
+  PROTECTED_ITEMS_DESCRIPTION: __('Protected items are those with blue buttons, disabled by default because they are used by WordPress or plugins. Enable this if you are sure you want to delete them.', 'database-cleaner'),
 }
 
 i18n.CUSTOM_QUERIES = {

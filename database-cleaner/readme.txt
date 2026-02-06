@@ -3,9 +3,9 @@ Contributors: TigrouMeow
 Tags: database, clean, cleaner, optimize, sql
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.2.8
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,27 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.3 (2026/01/05) =
+* Add: New option in the settings to control whether protected content can be deleted.
+
+= 1.3.2 (2025/12/16) =
+* Add: Expanded compatibility with additional plugins.
+
+= 1.3.1 (2025/12/03) =
+* Add: Expanded compatibility with additional plugins.
+* 🎵 Discuss with others about Database Cleaner on [the Discord](https://discord.gg/bHDGh38).
+* 🌴 Keep us motivated with [a little review here](https://wordpress.org/support/plugin/database-cleaner/reviews/). Thank you!
+* 🥰 If you want to help us, check our [Patreon](https://www.patreon.com/meowapps). Thank you!
+
+= 1.3.0 (2025/11/14) =
+* Update: Enhanced UI and UX.
+* Add: 'Protected Items' option to safely delete more items.
+* Fix: Hotfix to ensure proper cleanup of scheduled hooks by refactoring cron entry removal.
+
+= 1.2.9 (2025/11/12) =
+* Add: Support for additional plugins.  
+* Fix: Minor UI issues.
 
 = 1.2.8 (2025/09/29) =
 * Update: Enhanced support for more plugins.
