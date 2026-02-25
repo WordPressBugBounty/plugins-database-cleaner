@@ -624,6 +624,7 @@ class Meow_DBCLNR_Core
 			'module_options' => true,
 			'module_metadata' => true,
 			'module_cronjobs' => true,
+			'module_devtools' => false,
 			'module_customequeries' => true,
 			'logs_path' => null,
 			'auto_refresh_core_count' => false,
@@ -688,17 +689,10 @@ class Meow_DBCLNR_Core
 		$updated = update_option( $this->option_name, $options, false );
 		$options = $this->sanitize_options();
 		if ( $updated ) {
-
-			// Make a list of the updated options
-			$updated_options = [];
-			foreach ( $options as $key => $value ) {
-				if ( $value !== $previous_options[$key] ) {
-					$updated_options[$key] = $value;
-				}
-			}
+			$sweeper_updated = $previous_options['sweeper_enabled'] !== $options['sweeper_enabled'] || $previous_options['sweeper_schedule'] !== $options['sweeper_schedule'];
 
 			// Check Nyao Sweeper
-			if ( isset( $updated_options['sweeper_enabled'] ) || isset( $updated_options['sweeper_schedule'] ) ) {
+			if ( $sweeper_updated ) {
 				wp_clear_scheduled_hook( 'dbclnr_cron_sweeper' );
 				if ( $options['sweeper_enabled'] ) {
 					$thirty_minutes_later = time() + 30 * 60;
