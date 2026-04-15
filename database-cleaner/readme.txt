@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,12 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.5 (2026/04/15) =
+* Add: Introduced a script to automatically detect and clean duplicated CSV entries.
+* Add: Added broader plugin support to improve compatibility with other WordPress plugins.
+* Update: Optimized revision-related operations using more efficient database queries.
+* Add: Added bulk reassign functionality to quickly reassign multiple items at once.
 
 = 1.3.4 (2026/02/25) =
 * Add: New module_devtools option to give developers easier access to debugging.
