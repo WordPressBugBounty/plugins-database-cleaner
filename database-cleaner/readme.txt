@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,10 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.6 (2026/04/25) =
+* Update: Reworked the custom queries workflow.
+* Update: Better UI/UX.
 
 = 1.3.5 (2026/04/15) =
 * Add: Introduced a script to automatically detect and clean duplicated CSV entries.
