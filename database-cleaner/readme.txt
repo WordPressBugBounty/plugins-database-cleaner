@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.8 (2026/06/28) =
+* Update: Support more plugins.
 
 = 1.3.7 (2026/05/30) =
 * Update: More plugins.
