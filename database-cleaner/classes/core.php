@@ -48,6 +48,13 @@ class Meow_DBCLNR_Core
 			new Meow_DBCLNR_Rest( $this, $this->admin );
 		}
 
+		// MCP tools, served through AI Engine on its own REST route. Restricted to REST
+		// and CLI on purpose: reading the options costs a query, and a front-end page
+		// load can never serve an MCP tool anyway.
+		if ( ( $this->is_rest || $this->is_cli ) && ( class_exists( 'Meow_MWAI_Core' ) || isset( $GLOBALS['mwai'] ) ) ) {
+			new Meow_DBCLNR_MCP( $this, $this->admin );
+		}
+
 		// Dashboard
 		if ( is_admin() ) {
 			new Meow_DBCLNR_UI( $this, $this->admin );
@@ -628,6 +635,7 @@ class Meow_DBCLNR_Core
 			'module_customequeries' => true,
 			'logs_path' => null,
 			'auto_refresh_core_count' => false,
+			'mcp_support' => false,
 		];
 
 		// Clean Style Options for All Items

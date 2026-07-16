@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.8
+Stable tag: 1.3.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,12 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.3.9 (2026/07/16) =
+* Fix: Table deletion check no longer incorrectly allows WordPress core tables to be deleted.
+* Add: MCP tools to allow AI assistants to inspect and clean the database through AI Engine.
+* Update: Meow Apps tables are now recognized by their prefix instead of relying on a CSV list.
+* Fix: Capabilities limitations that were built but never returned are now properly reported.
 
 = 1.3.8 (2026/06/28) =
 * Update: Support more plugins.

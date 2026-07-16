@@ -212,6 +212,9 @@ i18n.SETTINGS = {
   PROTECTED_ITEMS: __('Protected Items', 'database-cleaner'),
   PROTECTED_ITEMS_ENABLE_DELETION: __('Enable Deletion', 'database-cleaner'),
   PROTECTED_ITEMS_DESCRIPTION: __('Protected items are those with blue buttons, disabled by default because they are used by WordPress or plugins. Enable this if you are sure you want to delete them.', 'database-cleaner'),
+  MCP: __('MCP', 'database-cleaner'),
+  MCP_DESCRIPTION: __('Registers the Database Cleaner tools in the MCP server of AI Engine, so an AI assistant can inspect the database, report what is worth cleaning, and clean it up. The tools explain what is protected and what is not, and every deletion requires an explicit confirmation.', 'database-cleaner'),
+  MCP_UNAVAILABLE: __('This requires AI Engine, with its MCP module enabled.', 'database-cleaner'),
 }
 
 i18n.CUSTOM_QUERIES = {

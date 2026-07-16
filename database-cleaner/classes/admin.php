@@ -46,6 +46,7 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 			'domain' => DBCLNR_DOMAIN,
 			'is_pro' => class_exists( 'MeowPro_DBCLNR_Core' ),
 			'is_registered' => !!$this->is_registered(),
+			'has_mcp' => $this->has_mcp(),
 			'rest_nonce' => wp_create_nonce( 'wp_rest' ),
 			'core' => [
 				'posts' => $this->core->add_clean_style_data( Meow_DBCLNR_Items::$POSTS ),
@@ -64,6 +65,12 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 			'options' => $this->core->get_all_options(),
 			'metadata_tables' => $this->core->get_metadata_tables(),
 		] );
+	}
+
+	// Runtime only, so it is never persisted with the options.
+	function has_mcp() {
+		global $mwai;
+		return !empty( $mwai ) && method_exists( $mwai, 'hasMCP' ) && $mwai->hasMCP();
 	}
 
 	function is_registered() {
@@ -446,7 +453,10 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 	}
 
 	function valid_deletable_table_name( $table_name ) {
-		$data = apply_filters( 'dbclnr_check_table_info', $this->core->prefix . $table_name, null );
+		// The name arrives already prefixed, and check_table_info() strips the prefix
+		// itself. Prepending it here made the lookup miss every core table, so this
+		// returned true for wp_posts and the likes.
+		$data = apply_filters( 'dbclnr_check_table_info', $table_name, null );
 		return strtolower($data['usedBy']) !== 'wordpress';
 	}
 
