@@ -4,8 +4,8 @@ Tags: database, clean, cleaner, optimize, sql
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.0
-Requires PHP: 7.4
-Stable tag: 1.3.9
+Requires PHP: 8.1
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,15 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.0 (2026/08/17) =
+* Update: Rebuilt the Meow Apps dashboard as a wired board.
+* Add: Optional AI analysis of the site in the Health tab.
+* Update: Minimum PHP version is now 8.1.
+* Add: More plugins listed in the dashboard.
+* 🎵 Discuss with others about Database Cleaner on [the Discord](https://discord.gg/bHDGh38).
+* 🌴 Keep us motivated with [a little review here](https://wordpress.org/support/plugin/database-cleaner/reviews/). Thank you!
+* 🥰 If you want to help us, check our [Patreon](https://www.patreon.com/meowapps). Thank you!
 
 = 1.3.9 (2026/07/16) =
 * Fix: Table deletion check no longer incorrectly allows WordPress core tables to be deleted.
