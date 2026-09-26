@@ -9,7 +9,7 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 			add_action( 'admin_menu', array( $this, 'app_menu' ) );
 
 			// Load the scripts only if they are needed by the current screen
-			$page = isset( $_GET["page"] ) ? sanitize_text_field( $_GET["page"] ) : null;
+			$page = isset( $_GET["page"] ) ? sanitize_text_field( $_GET["page"] ) : '';
 			$is_dbclnr_screen = in_array( $page, [ 'dbclnr_settings', 'dbclnr_dashboard' ] );
 			$is_meowapps_dashboard = $page === 'meowapps-main-menu';
 			if ( $is_meowapps_dashboard || $is_dbclnr_screen ) {

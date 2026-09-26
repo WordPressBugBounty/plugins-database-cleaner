@@ -3,9 +3,9 @@ Contributors: TigrouMeow
 Tags: database, clean, cleaner, optimize, sql
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,13 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.1 (2026/09/26) =
+* Update: The license screen now shows what went wrong instead of a generic error message.
+* Update: Refreshed the dashboard design.
+* Update: Added more plugins to the leftover options and post types detection lists.
+* Fix: A server that cannot reach the license server no longer makes the admin hang.
+* Fix: Removed a PHP warning caused by an empty value in the admin screen.
 
 = 1.4.0 (2026/08/17) =
 * Update: Rebuilt the Meow Apps dashboard as a wired board.
