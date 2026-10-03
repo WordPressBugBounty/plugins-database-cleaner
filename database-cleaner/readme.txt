@@ -1,15 +1,15 @@
-=== Database Cleaner ===
+=== Database Cleaner: Cleanup, Optimization & Repair ===
 Contributors: TigrouMeow
-Tags: database, clean, cleaner, optimize, sql
+Tags: cleanup, database, optimization, optimize, transients
 Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-User-friendly tool to clean and optimize databases. Efficiently manages large databases, simplifying repair and ensuring peak performance.
+Clean up and optimize your WordPress database: revisions, transients, autoload, orphaned data. Built for large databases, safe and fast.
 
 == Description ==
 
@@ -45,6 +45,20 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.2 (2026/10/03) =
+* Add: Confirmation modal before deleting entries.
+* Add: Tooltip showing the deletion status of each item.
+* Update: Database size now refreshes after a cleanup runs.
+* Update: Next scheduled run of cron jobs now shows in your local time.
+* Update: Entry counts are now formatted with thousands separators.
+* Fix: Expired transients are now removed with the WordPress transient functions, so object caches stay in sync.
+* Fix: Orphaned term relationships are now matched and deleted by term taxonomy, so the right rows are cleaned.
+* Fix: Metadata size is now measured with the byte length of the meta value.
+* Fix: Table repair query now runs correctly.
+* Fix: Automatic cleanups now re-check the "auto items only" setting before deleting.
+* Fix: API error details are now shown when a request fails.
+* Fix: Fatal PHP errors during a cleanup or REST request are now caught instead of breaking the page.
 
 = 1.4.1 (2026/09/26) =
 * Update: The license screen now shows what went wrong instead of a generic error message.

@@ -310,7 +310,7 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 		if ( count( $sizes ) > 0 ) {
 			$size_where = [];
 			foreach ( $sizes as $size ) {
-				$size_where[] = $wpdb->prepare( "meta_value_length >= %d", (int)$size );
+				$size_where[] = $wpdb->prepare( "LENGTH(meta_value) >= %d", (int)$size );
 			}
 			$size_where_clause = implode( ' OR ', $size_where );
 			$where_clause .= "AND ($size_where_clause)";
@@ -424,7 +424,7 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 
 	function repair_table( $table_name ) {
 		global $wpdb;
-		$result = $wpdb->query( "OPTIMIZE TABLE `{$table_name}`;" );
+		$result = $wpdb->query( "REPAIR TABLE `{$table_name}`;" );
 		if ($result === false) {
 			error_log('PHP Exception: ' . $wpdb->last_error);
 		}

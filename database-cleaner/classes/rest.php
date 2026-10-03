@@ -254,7 +254,7 @@ class Meow_DBCLNR_Rest
 				'callback' => array( $this, 'rest_remove_indexes' )
 			) );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			var_dump($e);
 		}
 	}
@@ -339,7 +339,7 @@ class Meow_DBCLNR_Rest
 			$message = __( $success ? 'OK' : "Could not update options.", 'database-cleaner' );
 			return new WP_REST_Response([ 'success' => $success, 'message' => $message, 'options' => $options ], 200 );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -491,7 +491,7 @@ class Meow_DBCLNR_Rest
 				],
 			], 200 );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -613,7 +613,7 @@ class Meow_DBCLNR_Rest
 				],
 			], 200 );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -670,7 +670,7 @@ class Meow_DBCLNR_Rest
 				],
 			], 200 );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -754,7 +754,7 @@ class Meow_DBCLNR_Rest
 				],
 			], 200 );
 		}
-		catch (Exception $e) {
+		catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -809,7 +809,7 @@ class Meow_DBCLNR_Rest
 			return new WP_REST_Response( [
 				'success' => true,
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'data' => $tables,
@@ -838,7 +838,7 @@ class Meow_DBCLNR_Rest
 				'data' => $this->core->get_table_data( $table, $offset ),
 				'count' => $count,
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -885,7 +885,7 @@ class Meow_DBCLNR_Rest
 			return new WP_REST_Response( [
 				'success' => true,
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'data' => $tables,
@@ -933,7 +933,7 @@ class Meow_DBCLNR_Rest
 			return new WP_REST_Response( [
 				'success' => true,
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'data' => $tables,
@@ -971,7 +971,7 @@ class Meow_DBCLNR_Rest
 				'success' => false,
 				'message' => $e->getMessage(),
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),
@@ -1025,7 +1025,7 @@ class Meow_DBCLNR_Rest
 				'success' => false,
 				'message' => $e->getMessage(),
 			], 200 );
-		} catch ( Exception $e ) {
+		} catch ( Throwable $e ) {
 			return new WP_REST_Response([
 				'success' => false,
 				'message' => $e->getMessage(),

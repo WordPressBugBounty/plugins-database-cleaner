@@ -33,17 +33,12 @@ class Meow_DBCLNR_Queries_Options_Expired_Transients extends Meow_DBCLNR_Queries
         if ($count === 0) {
             return 0;
         }
-        $result = $wpdb->query( $wpdb->prepare(
-            "
-			DELETE FROM $wpdb->options
-			WHERE option_name LIKE '_transient_timeout_%'
-				AND option_value <= %d
-			LIMIT %d
-			",
-			time(), $limit
-        ) );
-        if ($result === false) {
-            throw new Error('Failed to delete the expired transients. : ' . $wpdb->last_error);
+        // delete_transient() removes both the value and its timeout row (and clears the object cache).
+        $result = 0;
+        foreach ( $this->get_query( 0, $limit ) as $transient ) {
+            if ( delete_transient( $transient['option_name'] ) ) {
+                $result++;
+            }
         }
         return $result;
     }

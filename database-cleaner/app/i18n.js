@@ -10,6 +10,8 @@ i18n.COMMON = {
   BY_JORDY_MEOW: __('By Jordy Meow', 'media-cleaner'),
   TABLE: __('Table', 'database-cleaner'),
   CLOSE: __('Close', 'database-cleaner'),
+  PROTECTED_ITEM_TOOLTIP: __('Protected: this is used by WordPress or a plugin. To delete it anyway, enable deletion of Protected Items in the Settings.', 'database-cleaner'),
+  NOTHING_TO_DELETE: __('Nothing to delete.', 'database-cleaner'),
   USED_BY: __('Used By', 'database-cleaner'),
   SELECTED_ITEMS: __('selected items', 'database-cleaner'),
   UNKNOWN: __('Unknown', 'database-cleaner'),

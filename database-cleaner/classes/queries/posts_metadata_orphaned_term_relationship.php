@@ -64,10 +64,10 @@ class Meow_DBCLNR_Queries_Posts_Metadata_Orphaned_Term_Relationship extends Meow
         $result = $wpdb->query( $wpdb->prepare(
             "
 			DELETE FROM $wpdb->term_relationships
-			WHERE object_id IN (
+			WHERE term_taxonomy_id IN (
 				SELECT *
 				FROM (
-					SELECT t.object_id
+					SELECT t.term_taxonomy_id
 					FROM $wpdb->term_relationships t
 					LEFT JOIN $wpdb->term_taxonomy p ON t.term_taxonomy_id = p.term_taxonomy_id
 					WHERE p.term_taxonomy_id IS NULL
