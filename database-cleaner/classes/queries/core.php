@@ -100,4 +100,77 @@ class Meow_DBCLNR_Queries_Core
 
     return [ $post_modified, $post_modified_gmt ];
   }
+
+  // Shared by the duplicated post/term/user/comment meta items. $meta is [ table, id column, object column ].
+  // A duplicate is a row with the same object, key and exact value as a newer row; the newest is kept.
+  // Rows sharing a key with different values are legit multi-value meta and must never match: the old
+  // queries grouped on object + key only, which deleted them (term, user, comment) or made the count
+  // never reach zero (post). MD5 groups in one scan; the CAST(... AS BINARY) check makes the match
+  // exact (case, trailing spaces, hash collisions), since the default collations consider 'Hello' and
+  // 'hello ' equal.
+  protected function duplicated_meta_sql( $meta, $select )
+  {
+    list( $table, $id, $object ) = $meta;
+    return "
+      SELECT $select
+      FROM (
+        SELECT $object AS object_id, meta_key, MD5(meta_value) AS hash, MAX($id) AS keep_id
+        FROM $table
+        GROUP BY $object, meta_key, hash
+        HAVING COUNT(*) > 1
+      ) d
+      INNER JOIN $table t
+        ON t.$object = d.object_id AND t.meta_key <=> d.meta_key AND t.$id < d.keep_id
+      INNER JOIN $table k
+        ON k.$id = d.keep_id
+      WHERE CAST(t.meta_value AS BINARY) <=> CAST(k.meta_value AS BINARY)
+    ";
+  }
+
+  protected function count_duplicated_meta( $meta )
+  {
+    global $wpdb;
+    $count = $wpdb->get_var( $this->duplicated_meta_sql( $meta, 'COUNT(*)' ) );
+    if ( $count === null ) {
+      throw new Error( 'Failed to count the duplicated meta: ' . $wpdb->last_error );
+    }
+    return (int)$count;
+  }
+
+  protected function get_duplicated_meta( $meta, $offset, $limit )
+  {
+    global $wpdb;
+    return $wpdb->get_results( $wpdb->prepare(
+      $this->duplicated_meta_sql( $meta, 't.*' ) . " ORDER BY t.{$meta[1]} LIMIT %d, %d",
+      $offset,
+      $limit
+    ), ARRAY_A );
+  }
+
+  // Deletes up to $limit duplicates. With deep deletions, $deep_callback receives the ids so WordPress
+  // deletes them one by one (hooks and caches included).
+  protected function delete_duplicated_meta( $meta, $limit, $deep_callback = null )
+  {
+    global $wpdb;
+    list( $table, $id ) = $meta;
+    $ids = $wpdb->get_col( $wpdb->prepare(
+      $this->duplicated_meta_sql( $meta, "t.$id" ) . " ORDER BY t.$id LIMIT %d",
+      $limit
+    ) );
+    if ( $wpdb->last_error ) {
+      throw new Error( 'Failed to find the duplicated meta: ' . $wpdb->last_error );
+    }
+    if ( empty( $ids ) ) {
+      return 0;
+    }
+    if ( $deep_callback ) {
+      return call_user_func( $deep_callback, $ids );
+    }
+    $placeholder = implode( ', ', array_fill( 0, count( $ids ), '%d' ) );
+    $result = $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE $id IN ($placeholder)", $ids ) );
+    if ( $result === false ) {
+      throw new Error( 'Failed to delete the duplicated meta: ' . $wpdb->last_error );
+    }
+    return $result;
+  }
 }

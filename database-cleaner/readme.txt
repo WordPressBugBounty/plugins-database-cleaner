@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,10 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.3 (2026/10/04) =
+* Fix: Duplicated meta cleanups for posts, terms, users and comments now only remove exact duplicates, meaning entries that share the same key and the same value.
+* Fix: The duplicated post meta cleanup no longer runs endlessly.
 
 = 1.4.2 (2026/10/03) =
 * Add: Confirmation modal before deleting entries.
