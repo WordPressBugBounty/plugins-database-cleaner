@@ -736,7 +736,15 @@ class Meow_DBCLNR_Rest
 			], 400 );
 		}
 		try {
-			$result = $this->core->delete_entries( $item );
+			// One batch per HTTP request was very slow on big cleanups (each request boots WordPress,
+			// and the UI naps between requests), so keep deleting batches here for a few seconds.
+			// The UI skips its remaining requests once 'finished' is true.
+			$start = microtime( true );
+			$result = 0;
+			do {
+				$deleted = (int)$this->core->delete_entries( $item );
+				$result += $deleted;
+			} while ( !$this->is_finished( $deleted ) && microtime( true ) - $start < 3 );
 			$name = Meow_DBCLNR_Items::getName( $item ) ?? $item;
 
 			// Logging
@@ -750,7 +758,7 @@ class Meow_DBCLNR_Rest
 				'success' => true,
 				'data' => [
 					'deleted' => $result,
-					'finished' => $this->is_finished( $result ),
+					'finished' => $this->is_finished( $deleted ),
 				],
 			], 200 );
 		}
