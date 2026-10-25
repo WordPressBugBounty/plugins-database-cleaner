@@ -7,7 +7,7 @@ i18n.COMMON = {
   TUTORIAL: __('Tutorial', 'database-cleaner'),
   SETTINGS: __('Settings', 'database-cleaner'),
   DASHBOARD: __('Dashboard', 'database-cleaner'),
-  BY_JORDY_MEOW: __('By Jordy Meow', 'media-cleaner'),
+  BY_JORDY_MEOW: __('By Jordy Meow', 'database-cleaner'),
   TABLE: __('Table', 'database-cleaner'),
   CLOSE: __('Close', 'database-cleaner'),
   PROTECTED_ITEM_TOOLTIP: __('Protected: this is used by WordPress or a plugin. To delete it anyway, enable deletion of Protected Items in the Settings.', 'database-cleaner'),
@@ -21,7 +21,7 @@ i18n.COMMON = {
   SEARCH: __('Search', 'database-cleaner'),
   ITEMS_PER_PAGE: __('items per page', 'database-cleaner'),
   CLEAN: __('Clean', 'database-cleaner'),
-  DEV_TOOLS: __( 'Dev Tools', 'ai-engine' ),
+  DEV_TOOLS: __( 'Dev Tools', 'database-cleaner' ),
   ENABLE: __('Enable', 'database-cleaner'),
   LOGS: __('Logs', 'database-cleaner'),
   CLEAR_LOGS: __('Clear Logs', 'database-cleaner'),
@@ -29,8 +29,8 @@ i18n.COMMON = {
 };
 
 i18n.HELP = {
-  DEV_TOOLS: __( 'Enable a new tab with debugging tools. For developers only.', 'ai-engine' ),
-  SWEEPER: __( 'Constantly and discreetly cleans your database in bite-sized tasks, keeping your site\'s speed unaffected. All the items set with "Auto" will be processed.', 'ai-engine' ),
+  DEV_TOOLS: __( 'Enable a new tab with debugging tools. For developers only.', 'database-cleaner' ),
+  SWEEPER: __( 'Constantly and discreetly cleans your database in bite-sized tasks, keeping your site\'s speed unaffected. All the items set with "Auto" will be processed.', 'database-cleaner' ),
 };
 
 i18n.CHART_SIZES = {
@@ -177,7 +177,7 @@ i18n.SETTINGS = {
   DEEP_DELETIONS_DESCRIPTION: __("Items will be deleted by calling the internal WordPress functions, so it will have the side effect of a <i>natural cleaning</i>, as if you were deleting posts (and other elements) naturally.", 'database-cleaner'),
   CUSTOM_USED_BY_DATA: __('Custom <i>Used By</i> data', 'database-cleaner'),
   RESET_USED_BY_DATA: __('Reset Used By', 'database-cleaner'),
-  CUSTOM_USED_BY_DATA_DESCRIPTION: __("Did you categorized everything? Nice! ☺️ Please share this data with me through my <a href='https://meowapps.com/contact' target='_blank'>contact form</a>. Thank you! ", 'database-cleaner'),
+  CUSTOM_USED_BY_DATA_DESCRIPTION: __("Did you categorize everything? Nice! ☺️ Please share this data with me through my <a href='https://meowapps.com/contact' target='_blank'>contact form</a>. Thank you! ", 'database-cleaner'),
   USED_BY_POST_TYPES: __('POST TYPES', 'database-cleaner'),
   USED_BY_OPTIONS: __('OPTIONS', 'database-cleaner'),
   USED_BY_TABLES: __('TABLES', 'database-cleaner'),

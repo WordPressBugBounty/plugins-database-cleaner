@@ -21,8 +21,10 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 	function admin_enqueue_scripts() {
 
 		// Load the scripts
-		$physical_file = DBCLNR_PATH . '/app/index.js';
-		$cache_buster = file_exists( $physical_file ) ? filemtime( $physical_file ) : DBCLNR_VERSION;
+		// Both bundles share one version, so it follows whichever changed last: a change that only
+		// touches the vendor bundle (NekoUI) would otherwise keep its old copy in the browser cache.
+		$bundles = array_filter( array( DBCLNR_PATH . '/app/index.js', DBCLNR_PATH . '/app/vendor.js' ), 'file_exists' );
+		$cache_buster = $bundles ? max( array_map( 'filemtime', $bundles ) ) : DBCLNR_VERSION;
 		wp_register_script( 'dbclnr-vendor', DBCLNR_URL . 'app/vendor.js', ['wp-element', 'wp-i18n'], $cache_buster );
 		wp_register_script( 'dbclnr', DBCLNR_URL . 'app/index.js', ['dbclnr-vendor', 'wp-i18n'], $cache_buster );
 		wp_set_script_translations( 'dbclnr', 'database-cleaner' );
@@ -45,6 +47,8 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 			'db_prefix' => $this->core->prefix,
 			'domain' => DBCLNR_DOMAIN,
 			'is_pro' => class_exists( 'MeowPro_DBCLNR_Core' ),
+			// Installed vs latest version for the header line (common/premium/renewal.php).
+			'version_info' => apply_filters( DBCLNR_PREFIX . '_meowapps_version_info', null ),
 			'is_registered' => !!$this->is_registered(),
 			'has_mcp' => $this->has_mcp(),
 			'rest_nonce' => wp_create_nonce( 'wp_rest' ),

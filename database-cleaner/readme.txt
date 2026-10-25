@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,15 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.5 (2026/10/25) =
+* Add: The header now shows the installed version, with a notice on how to update or renew when a newer one is available.
+* Fix: Stopping Auto Clean now resets the page instead of leaving the progress bar stuck.
+* Fix: The database size was stale on MySQL 8, and it is now refreshed when the page opens.
+* Fix: Corrected a typo and three wrong text domains.
+* 🎵 Discuss with others about Database Cleaner on [the Discord](https://discord.gg/bHDGh38).
+* 🌴 Keep us motivated with [a little review here](https://wordpress.org/support/plugin/database-cleaner/reviews/). Thank you!
+* 🥰 If you want to help us, check our [Patreon](https://www.patreon.com/meowapps). Thank you!
 
 = 1.4.4 (2026/10/05) =
 * Update: Cleanups now delete several batches per request, making them much faster.

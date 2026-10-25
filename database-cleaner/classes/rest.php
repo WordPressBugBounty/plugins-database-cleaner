@@ -322,8 +322,8 @@ class Meow_DBCLNR_Rest
 		return new WP_REST_Response( [ 'success' => true ], 200 );
 	}
 
-	function rest_total_db_size() {
-		$this->core->refresh_database_size();
+	function rest_total_db_size( $request ) {
+		$this->core->refresh_database_size( !$request->get_param( 'silent' ) );
 		return new WP_REST_Response( [ 
 			'success' => true,
 			'data' => $this->core->get_all_options(),

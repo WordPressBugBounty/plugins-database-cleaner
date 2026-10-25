@@ -430,6 +430,15 @@ class Meow_DBCLNR_Core
 
 	function get_tables_size() {
 		global $wpdb;
+
+		// MySQL 8 serves information_schema.TABLES sizes from a cache (information_schema_stats_expiry,
+		// 24h by default) that was seen stuck for days, so the size never moved. Read the live stats instead.
+		$stats_expiry = $wpdb->get_row( "SHOW SESSION VARIABLES LIKE 'information_schema_stats_expiry'", ARRAY_A );
+		$stats_expiry = !empty( $stats_expiry ) ? (int)$stats_expiry['Value'] : 0;
+		if ( $stats_expiry ) {
+			$wpdb->query( "SET SESSION information_schema_stats_expiry = 0" );
+		}
+
 		$results = $wpdb->get_results( $wpdb->prepare( "
 			SELECT TABLE_NAME 'table', ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2) 'size'
 			FROM information_schema.TABLES
@@ -438,6 +447,10 @@ class Meow_DBCLNR_Core
 			",
 			DB_NAME
 		), ARRAY_A );
+
+		if ( $stats_expiry ) {
+			$wpdb->query( $wpdb->prepare( "SET SESSION information_schema_stats_expiry = %d", $stats_expiry ) );
+		}
 
 		$total = 0;
 		foreach ( $results as $item ) {
@@ -467,11 +480,13 @@ class Meow_DBCLNR_Core
 		return $option_db_sizes[ count( $option_db_sizes ) - 2 ]['size'];
 	}
 
-	function refresh_database_size() {
+	function refresh_database_size( $log = true ) {
 		$total_size = $this->get_database_size();
 		$this->update_database_size( $total_size );
-		$previous_size = $this->get_yesterday_database_size();
-		$this->log("✅ DB size: {$total_size}MB (yesterday: {$previous_size} MB).");
+		if ( $log ) {
+			$previous_size = $this->get_yesterday_database_size();
+			$this->log("✅ DB size: {$total_size}MB (yesterday: {$previous_size} MB).");
+		}
 		return $total_size;
 	}
 
