@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,10 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 1. No screenshot yet.
 
 == Changelog ==
+
+= 1.4.6 (2026/10/26) =
+* Add: New Meow Apps dashboard shared across Meow Apps plugins.
+* Fix: Database Cleaner scripts no longer clash with Media Cleaner scripts on the Meow Apps dashboard.
 
 = 1.4.5 (2026/10/25) =
 * Add: The header now shows the installed version, with a notice on how to update or renew when a newer one is available.
