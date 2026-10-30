@@ -5,7 +5,7 @@ Donate link: https://www.patreon.com/meowapps
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.4.6
+Stable tag: 1.4.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,8 @@ Clean up and optimize your WordPress database: revisions, transients, autoload, 
 == Description ==
 
 Database Cleaner is packed with features to handle big databases, built from years of experience with similar plugins. It works great with the latest WP and PHP versions and has an easy-to-use interface. For large tasks, it uses asynchronous requests to avoid errors and timeouts, ensuring smooth processing. Check it out at [Database Cleaner](https://meowapps.com/database-cleaner/).
+
+https://www.youtube.com/watch?v=98jjJZO37xQ
 
 **IMPORTANT**: Always back up your data before using this or any plugin! While Database Cleaner is reliable, it's always best to be safe. Better safe than sorry! :)
 
@@ -42,9 +44,20 @@ I'm open to feedback and would be thrilled to discuss how Database Cleaner can b
 
 == Screenshots ==
 
-1. No screenshot yet.
+
+1. See at a glance how much clutter WordPress has piled up: revisions, drafts, spam, orphaned data and expired transients.
+2. Preview exactly what will be deleted before you clean anything.
+3. Find heavy and leftover tables, then optimize, repair or remove them.
+4. Spot the big autoloaded options that slow down every page, and switch off autoload or delete them.
+5. Clean up scheduled tasks left behind by plugins you no longer use.
 
 == Changelog ==
+
+= 1.4.8 (2026/10/30) =
+* Fix: Security: A crafted table name could delete core tables, and core tables of every site in a network are now protected.
+
+= 1.4.7 (2026/10/30) =
+* Fix: Caches left without an expiry date by an older cleanup are now removed once, so they can refresh again.
 
 = 1.4.6 (2026/10/26) =
 * Add: New Meow Apps dashboard shared across Meow Apps plugins.

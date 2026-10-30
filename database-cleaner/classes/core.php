@@ -58,6 +58,36 @@ class Meow_DBCLNR_Core
 		// Dashboard
 		if ( is_admin() ) {
 			new Meow_DBCLNR_UI( $this, $this->admin );
+			add_action( 'admin_init', array( $this, 'heal_orphaned_transients' ) );
+		}
+	}
+
+	// Before 2026-10-03, the expired-transients cleaner deleted only the _transient_timeout_ rows and
+	// left the values behind with no expiry, so those caches never expired again (a site's API token,
+	// exchange rates and feeds stayed frozen for weeks). This one-time repair removes those values.
+	// It only takes rows saved with an expiry (autoload off), so transients meant to never expire
+	// (autoload on) are left alone.
+	function heal_orphaned_transients() {
+		if ( get_option( 'dbclnr_orphans_healed' ) || !current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		global $wpdb;
+		$names = $wpdb->get_col( "
+			SELECT v.option_name
+			FROM $wpdb->options v
+			LEFT JOIN $wpdb->options t ON t.option_name = CONCAT( '_transient_timeout_', SUBSTRING( v.option_name, 12 ) )
+			WHERE v.option_name LIKE '\\_transient\\_%'
+				AND v.option_name NOT LIKE '\\_transient\\_timeout\\_%'
+				AND v.autoload IN ( 'no', 'off', 'auto-off' )
+				AND t.option_id IS NULL
+			LIMIT 500
+		" );
+		foreach ( $names as $name ) {
+			delete_option( $name );
+		}
+		// A site with more than 500 gets the rest on the next admin page load.
+		if ( count( $names ) < 500 ) {
+			update_option( 'dbclnr_orphans_healed', time(), false );
 		}
 	}
 

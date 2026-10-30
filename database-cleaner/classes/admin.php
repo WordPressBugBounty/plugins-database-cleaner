@@ -410,6 +410,11 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 
 	function delete_table( $table_name ) {
 		global $wpdb;
+		// Last line of defense for every caller (REST and MCP): a name like x`,`wp_posts
+		// once dropped wp_posts through the backticks (Wordfence CVE-2025-8574).
+		if ( !$this->is_existing_table( $table_name ) || $this->is_protected_table( $table_name ) ) {
+			return false;
+		}
 		$result = $wpdb->query( "DROP TABLE IF EXISTS `{$table_name}`;" );
 		if ($result === false) {
 			error_log('PHP Exception: ' . $wpdb->last_error);
@@ -456,7 +461,41 @@ class Meow_DBCLNR_Admin extends MeowKit_DBCLNR_Admin {
 		return in_array( $table_name, $tables, true );
 	}
 
+	// An exact, existing table name made of identifier characters only (no backticks or commas).
+	function is_existing_table( $table_name ) {
+		global $wpdb;
+		if ( !is_string( $table_name ) || !preg_match( '/^[A-Za-z0-9_$-]+$/', $table_name ) ) {
+			return false;
+		}
+		return $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) ) ) === $table_name;
+	}
+
+	// Core tables of every site of a network, in any case (some hosts ignore it), plus,
+	// for site admins on a network, any table that isn't their own site's.
+	function is_protected_table( $table_name ) {
+		global $wpdb;
+		$core = Meow_DBCLNR_Support::$core_tables;
+		if ( is_multisite() ) {
+			$core = array_merge( $core, [ 'blogs', 'blogmeta', 'site', 'sitemeta', 'signups', 'registration_log' ] );
+		}
+		$names = implode( '|', array_map( function ( $name ) { return preg_quote( $name, '/' ); }, $core ) );
+		$base = preg_quote( $wpdb->base_prefix, '/' );
+		if ( preg_match( '/^' . $base . '(\d+_)?(' . $names . ')$/i', $table_name ) ) {
+			return true;
+		}
+		if ( is_multisite() && !is_super_admin() ) {
+			$other_site = preg_match( '/^' . $base . '(\d+)_/i', $table_name, $match ) && (int)$match[1] !== get_current_blog_id();
+			if ( $other_site || stripos( $table_name, $wpdb->prefix ) !== 0 ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function valid_deletable_table_name( $table_name ) {
+		if ( !$this->is_existing_table( $table_name ) || $this->is_protected_table( $table_name ) ) {
+			return false;
+		}
 		// The name arrives already prefixed, and check_table_info() strips the prefix
 		// itself. Prepending it here made the lookup miss every core table, so this
 		// returned true for wp_posts and the likes.
